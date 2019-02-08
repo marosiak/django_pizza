@@ -87,4 +87,4 @@ class Quanity(models.Model):
     value = models.IntegerField("Ilosc", default=1)
 
     def __str__(self):
-        return self.pizza.name+": "+str(self.quanitity)
+        return self.pizza.name+": "+str(self.value)
