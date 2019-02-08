@@ -18,9 +18,11 @@
    <ul>
    {% for pizza in order.pizzas.all  %}
       <li>{{pizza.name}}:
-         {% with count=pizza.quanities.first.value %}
-            {{ count }}
-         {% endwith %}
+         {% for quanity in pizza.quanities.all %}
+               {% if quanity.order.pk == order.pk %}
+                  {{ quanity.value }}
+               {% endif %}
+         {% endfor %}
          </li>
    {% endfor %}
    </ul>
