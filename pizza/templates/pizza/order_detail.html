@@ -1,0 +1,34 @@
+{% extends 'pizza/base.html' %}
+
+{% block content %}
+   <h3>Dane Kontaktowe</h3>
+   <p>Kontakt: {{order.phone_number}}</p>
+   <p>Ulica: {{order.street}}</p>
+   <p>Nr. budynku: {{order.building_number}}</p>
+   <p>Miasto: {{order.city}}</p>
+   <p>Do zapłaty: {{order.total_price}}</p>
+   <p>Czas zlecenia: {{order.start_time}}</p>
+   {% if order.end_time %}
+   <p>Czas Dostarczenia: {{order.end_time}}</p>
+   {% endif %}
+
+<br>
+
+   <h3>Zamówienia</h3>
+   <ul>
+   {% for pizza in order.pizzas.all  %}
+      <li>{{pizza.name}}:
+         {% with count=pizza.quanities.first.value %}
+            {{ count }}
+         {% endwith %}
+         </li>
+   {% endfor %}
+   </ul>
+   <br>
+   {% if not order.end_time %}
+         <a class="btn btn-success" href="{% url 'order_deliver' pk=order.pk %}">Dostarcz</a>
+   {% endif %}
+
+{% endblock %}
+
+
