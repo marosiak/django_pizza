@@ -1,20 +1,24 @@
 {% extends 'pizza/base.html' %}
 
 {% block content %}
-    <h1>Koszyk</h1>
+    {% if cart_items|length > 0 %}
+        <h1>Koszyk</h1>
 
-    {% for item in cart_items %}
-        {% for pizza in pizzas %}
-            {% if pizza.pk == item.pk %}
-                <div id="cart-item-flex">
-                    <p style="float:left;"> {{pizza}}: {{item.count}}</p>
-                    <a  class="btn btn-danger" href="{% url 'cart_clear' %}">X</a>
-                </div>
-            {% endif %}
+        {% for item in cart_items %}
+            {% for pizza in pizzas %}
+                {% if pizza.pk == item.pk %}
+                    <div id="cart-item-flex">
+                        <p style="float:left;"> {{pizza}}: {{item.count}}</p>
+                        <a class="btn btn-danger" href="{% url 'cart_remove_item' index=forloop.parentloop.counter0 %}">X</a>
+                    </div>
+                {% endif %}
+            {% endfor %}
         {% endfor %}
-    {% endfor %}
-    <a class="btn btn-danger" href="{% url 'cart_clear' %}">Wyczyść liste</a>
-    <a class="btn btn-success" href="{% url 'cart_clear' %}">Finalizuj</a>
+        <a class="btn btn-danger" href="{% url 'cart_clear' %}">Wyczyść liste</a>
+        <a class="btn btn-success" href="{% url 'cart_clear' %}">Finalizuj</a>
+    {% else %}
+        <p class="text-nowrap" style="position: absolute; text-align:center; font-size: 45px">Koszyk nie zawiera żadnych elementów</p>
+    {% endif %}
 {% endblock %}
 
 

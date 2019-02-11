@@ -12,6 +12,8 @@ urlpatterns = [
     path('pizza/<int:pk>', views.cart_add, name='cart_add'),
 
     path('cart', views.cart, name='cart'),
-    path('cart/clear', views.cart_clear, name='cart_clear')
+    path('cart/clear', views.cart_clear, name='cart_clear'),
+    path('cart/remove/<int:index>', views.cart_remove_item, name='cart_remove_item')
+
 
 ]
