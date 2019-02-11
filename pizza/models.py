@@ -31,10 +31,9 @@ class Order(models.Model):
     #     total_price += pizza.price
 
     def deliver(self):
-        if not self.is_deliviered:
-            self.end_time = timezone.now()
-            self.is_deliviered = True
-            self.save()
+        self.end_time = timezone.now()
+        self.is_deliviered = True
+        self.save()
 
     def __str__(self):
         return self.street + ", " + self.phone_number

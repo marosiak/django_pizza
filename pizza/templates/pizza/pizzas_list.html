@@ -1,0 +1,25 @@
+{% extends 'pizza/base.html' %}
+
+{% block content %}
+   {% for pizza in pizzas %}
+      <div class="card" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title">{{pizza}}</h5>
+          <p class="card-text">
+            <ul>
+               {% for ingradient in pizza.ingradients.all %}
+                  <li>{{ingradient}}</li>
+               {% endfor %}
+            </ul>
+          </p>
+            <form method='POST' action={% url 'cart_add' pk=pizza.pk %}>
+                {% csrf_token %}
+                <input class="btn btn-primary" type="submit" value="Zamów">
+                <input type="number" min="1" max="20" required name="count" value=1>
+                {{pizza.price}} zł / szt.
+            </form>
+
+        </div>
+      </div>
+   {% endfor %}
+{% endblock %}
