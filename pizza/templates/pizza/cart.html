@@ -8,8 +8,11 @@
             {% for pizza in pizzas %}
                 {% if pizza.pk == item.pk %}
                     <div id="cart-item-flex">
-                        <p style="float:left;"> {{pizza}}: {{item.count}}</p>
-                        <a class="btn btn-danger" href="{% url 'cart_remove_item' index=forloop.parentloop.counter0 %}">X</a>
+                        <p style="float:left;"> {{pizza}}</p>
+                                <form method='POST' action={% url 'cart_update' pk=pizza.pk %}> {% csrf_token %}
+                                    <input onchange="this.form.submit();" style="height:100%;" type="number" min="1" max="20" required name="count" value={{item.count}}>
+                                </form>
+                            <a class="btn btn-danger" href="{% url 'cart_remove_item' pk=forloop.parentloop.counter0 %}">X</a>
                     </div>
                 {% endif %}
             {% endfor %}

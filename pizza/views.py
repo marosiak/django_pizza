@@ -36,9 +36,16 @@ def pizzas_list(request):
 
 def cart_add(request, pk):
     if request.method == 'POST':
+        count = int(request.POST['count'])
         request.session.get('cart', [])
-        cart_item = {'pk': int(pk), 'count': int(request.POST['count'])}
-        request.session['cart'].append(cart_item)
+        exists = False
+        for cart_item in request.session['cart']:
+            if cart_item['pk'] == pk:
+                cart_item['count'] += count
+                exists = True
+        if not exists:
+            cart_item = {'pk': int(pk), 'count': count}
+            request.session['cart'].append(cart_item)
         request.session.modified = True
     return redirect('pizzas_list')
 
@@ -48,16 +55,21 @@ def cart(request):
     return render(request, 'pizza/cart.html', {"cart_items": cart_items, "pizzas": Pizza.objects.all()})
 
 
-def cart_remove_item(request, index):
-    # data = request.session['cart']
-    # data.pop(index)
-    # request.session['cart'] = data
-    request.session['cart'].pop(index)
+def cart_remove_item(request, pk):
+    request.session['cart'].pop(pk)
     request.session.modified = True
     return redirect('cart')
-
 
 def cart_clear(request):
     request.session.get('cart', [])  # in case this object doesnt exists
     request.session['cart'] = []
+    return redirect('cart')
+
+def cart_update(request, pk):
+    if request.method == 'POST':
+        count = int(request.POST['count'])
+        for cart_item in request.session['cart']:
+            if cart_item['pk'] == pk:
+                cart_item['count'] = count
+                request.session.modified = True
     return redirect('cart')

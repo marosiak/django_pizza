@@ -3,7 +3,6 @@ from django.db import models as models
 from django.urls import reverse
 from django.utils import timezone
 
-
 class Order(models.Model):
     # Fields
     street = models.CharField(max_length=25)
@@ -26,23 +25,12 @@ class Order(models.Model):
         through="Quanity"
     )
 
-    # pizzas = list(pizzas.all())
-    # for pizza in pizzas:
-    #     total_price += pizza.price
-
     def deliver(self):
         self.end_time = timezone.now()
-        self.is_deliviered = True
         self.save()
 
     def __str__(self):
         return self.street + ", " + self.phone_number
-
-    def get_absolute_url(self):
-        return reverse('Pizza_order_detail', args=(self.pk,))
-
-    def get_update_url(self):
-        return reverse('Pizza_order_update', args=(self.pk,))
 
 
 class Pizza(models.Model):
@@ -58,12 +46,6 @@ class Pizza(models.Model):
     def __str__(self):
         return self.name
 
-    def get_absolute_url(self):
-        return reverse('Pizza_pizza_detail', args=(self.pk,))
-
-    def get_update_url(self):
-        return reverse('Pizza_pizza_update', args=(self.pk,))
-
 
 class Ingradient(models.Model):
     # Fields
@@ -71,12 +53,6 @@ class Ingradient(models.Model):
 
     def __str__(self):
         return self.name
-
-    def get_absolute_url(self):
-        return reverse('Pizza_ingradient_detail', args=(self.pk,))
-
-    def get_update_url(self):
-        return reverse('Pizza_ingradient_update', args=(self.pk,))
 
 
 class Quanity(models.Model):
