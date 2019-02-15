@@ -60,16 +60,19 @@ def cart_remove_item(request, pk):
     request.session.modified = True
     return redirect('cart')
 
+
 def cart_clear(request):
     request.session.get('cart', [])  # in case this object doesnt exists
     request.session['cart'] = []
     return redirect('cart')
+
 
 def cart_update(request, pk):
     if request.method == 'POST':
         count = int(request.POST['count'])
         for cart_item in request.session['cart']:
             if cart_item['pk'] == pk:
-                cart_item['count'] = count
-                request.session.modified = True
+                if count > 0:
+                    cart_item['count'] = count
+                    request.session.modified = True
     return redirect('cart')
