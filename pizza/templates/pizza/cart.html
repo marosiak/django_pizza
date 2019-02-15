@@ -1,4 +1,5 @@
 {% extends 'pizza/base.html' %}
+{% load mathfilters %}
 
 {% block content %}
     {% if cart_items|length > 0 %}
@@ -12,10 +13,11 @@
                                 <form method='POST' action={% url 'cart_update' pk=pizza.pk %}> {% csrf_token %}
                                     <input onchange="this.form.submit();" style="height:100%;" type="number" min="1" max="20" required name="count" value={{item.count}}>
                                 </form>
+                            <p>{{   pizza.price|mul:item.count}} zł</p>
                             <a class="btn btn-danger" href="{% url 'cart_remove_item' pk=forloop.parentloop.counter0 %}">X</a>
                     </div>
                 {% endif %}
-            {% endfor %}
+            {% endfor %} 
         {% endfor %}
         <a class="btn btn-danger" href="{% url 'cart_clear' %}">Wyczyść liste</a>
         <a class="btn btn-success" href="{% url 'cart_clear' %}">Finalizuj</a>
