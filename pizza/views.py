@@ -37,18 +37,19 @@ def pizzas_list(request):
 def cart_add(request, pk):
     if request.method == 'POST':
         count = int(request.POST['count'])
-        request.session.get('cart', [])
         exists = False
-        for cart_item in request.session['cart']:
+        for cart_item in request.session.get('cart', []):
             if cart_item['pk'] == pk:
                 cart_item['count'] += count
                 exists = True
         if not exists:
             cart_item = {'pk': int(pk), 'count': count}
-            request.session['cart'].append(cart_item)
+            if 'cart' not in request.session:
+                request.session['cart'] = [cart_item]
+            else:
+                request.session['cart'].append(cart_item)
         request.session.modified = True
     return redirect('pizzas_list')
-
 
 def cart(request):
     cart_items = request.session.get('cart', [])

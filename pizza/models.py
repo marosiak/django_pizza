@@ -3,6 +3,7 @@ from django.db import models as models
 from django.urls import reverse
 from django.utils import timezone
 
+
 class Order(models.Model):
     # Fields
     street = models.CharField(max_length=25)
@@ -43,6 +44,7 @@ class Pizza(models.Model):
         'Ingradient',
         related_name="pizzas"
     )
+
     def __str__(self):
         return self.name
 
@@ -62,4 +64,4 @@ class Quanity(models.Model):
     value = models.IntegerField("Ilosc", default=1)
 
     def __str__(self):
-        return self.pizza.name+": "+str(self.value)
+        return self.pizza.name + ": " + str(self.value)

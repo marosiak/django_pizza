@@ -4,3 +4,4 @@ __pycache__
 virtualEnv/
 .vscode
 migrations
+.idea
