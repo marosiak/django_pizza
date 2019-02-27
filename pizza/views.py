@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from django.core import serializers
-from .models import Order, Pizza
+from django.utils import timezone
+
+from .models import Order, Pizza, Quanity
 from .forms import OrderForm
 import ipdb
 import json
@@ -80,5 +82,24 @@ def cart_update(request, pk):
 
 
 def order_finalize(request):
-    form = OrderForm(request.POST)
-    return render(request, 'pizza/order_finalize.html', {'cart': request.session['cart'], 'form': form})
+    if request.method == "POST":
+        form = OrderForm(request.POST)
+        if form.is_valid():
+            form = form.save(commit=True)
+            form.start_time = timezone.now()
+            for item in request.session['cart']:
+                pizza = Pizza.objects.get(pk=item['pk'])
+                order = Order.objects.get(form.pk)
+                Quanity.objects.create(pizza=pizza, order=order, value=item['count'])
+            form.save()
+    else:
+        form = OrderForm()
+    return render(request, 'pizza/order_finalize.html', {'cart': request.session['cart'], 'form': form })
+
+
+
+# class Quanity(models.Model):
+#     pizza = models.ForeignKey("Pizza", verbose_name="Pizza", on_delete=models.CASCADE, related_name="quanities")
+#     order = models.ForeignKey("Order", verbose_name="Zamówienie", on_delete=models.CASCADE)
+#
+#     value = models.IntegerField("Ilosc", default=1)

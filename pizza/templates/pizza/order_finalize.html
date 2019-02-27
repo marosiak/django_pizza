@@ -1,9 +1,29 @@
 {% extends 'pizza/base.html' %}
 
 {% block content %}
-   <form method="POST" class="finzalize-form">{% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="save btn btn-default">Save</button>
+   <form method='POST' action={% url 'order_finalize' %}>
+        {% csrf_token %}
+        Ulica: <input type="text" name={{form.street.name}}> <br>
+        Miasto: <input type="text" name={{form.city.name}}> <br>
+        Nr budynku: <input type="text" name={{form.building_number.name}}> <br>
+        Nr telefonu: <input type="text" name={{form.phone_number.name}}> <br>
+        Komentarz (opcjonalne): <input type="text" name={{form.comment.name}}> <br>
+
+        <input class="btn btn-primary" type="submit" value="Potwierdź">
     </form>
 
 {% endblock %}
+
+
+
+    <!--street = models.CharField(max_length=25)-->
+    <!--city = models.CharField(max_length=30)-->
+    <!--building_number = models.IntegerField()-->
+    <!--start_time = models.DateTimeField(editable=False, blank=True, null=True)-->
+    <!--end_time = models.DateTimeField(blank=True, null=True, auto_now=False, editable=False)-->
+    <!--phone_number = models.CharField(max_length=12)-->
+    <!--comment = models.TextField(max_length=150)-->
+
+    <!--total_price = models.IntegerField(blank=True, null=True, editable=False)-->
+    <!--total_price = 33-->
+    <!--start_time = timezone.now()-->
