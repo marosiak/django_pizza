@@ -85,13 +85,13 @@ def order_finalize(request):
     if request.method == "POST":
         form = OrderForm(request.POST)
         if form.is_valid():
-            form = form.save(commit=True)
+            form = form.save(commit=False)
             form.start_time = timezone.now()
+            form.save()
             for item in request.session['cart']:
                 pizza = Pizza.objects.get(pk=item['pk'])
-                order = Order.objects.get(form.pk)
-                Quanity.objects.create(pizza=pizza, order=order, value=item['count'])
-            form.save()
+                Quanity.objects.create(pizza=pizza, order=form, value=item['count'])
+
     else:
         form = OrderForm()
     return render(request, 'pizza/order_finalize.html', {'cart': request.session['cart'], 'form': form })
