@@ -51,6 +51,7 @@ def cart_add(request, pk):
         request.session.modified = True
     return redirect('pizzas_list')
 
+
 def cart(request):
     cart_items = request.session.get('cart', [])
     return render(request, 'pizza/cart.html', {"cart_items": cart_items, "pizzas": Pizza.objects.all()})
@@ -63,7 +64,6 @@ def cart_remove_item(request, pk):
 
 
 def cart_clear(request):
-    request.session.get('cart', [])  # in case this object doesnt exists
     request.session['cart'] = []
     return redirect('cart')
 
@@ -77,3 +77,8 @@ def cart_update(request, pk):
                     cart_item['count'] = count
                     request.session.modified = True
     return redirect('cart')
+
+
+def order_finalize(request):
+    form = OrderForm(request.POST)
+    return render(request, 'pizza/order_finalize.html', {'cart': request.session['cart'], 'form': form})

@@ -20,7 +20,7 @@
             {% endfor %} 
         {% endfor %}
         <a class="btn btn-danger" href="{% url 'cart_clear' %}">Wyczyść liste</a>
-        <a class="btn btn-success" href="{% url 'cart_clear' %}">Finalizuj</a>
+        <a class="btn btn-success" href="{% url 'order_finalize'%}">Finalizuj</a>
     {% else %}
         <p class="text-nowrap" style="position: absolute; text-align:center; font-size: 45px">Koszyk nie zawiera żadnych elementów</p>
     {% endif %}
