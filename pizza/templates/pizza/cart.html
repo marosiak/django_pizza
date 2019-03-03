@@ -2,28 +2,39 @@
 {% load mathfilters %}
 
 {% block content %}
+    <div id="cart-container" style="display: flex; flex-direction: column; width:60%;">
     {% if cart_items|length > 0 %}
-        <h1>Koszyk</h1>
+        <h1 style="margin-top: 19px; margin-right: 8px; margin-left: 22px;">Koszyk</h1>
 
         {% for item in cart_items %}
             {% for pizza in pizzas %}
                 {% if pizza.pk == item.pk %}
-                    <div id="cart-item-flex">
-                        <p style="float:left;"> {{pizza}}</p>
-                                <form method='POST' action={% url 'cart_update' pk=pizza.pk %}> {% csrf_token %}
-                                    <input onchange="this.form.submit();" style="height:100%;" type="number" min="1" max="20" required name="count" value={{item.count}}>
-                                </form>
-                            <p>{{   pizza.price|mul:item.count}} zł</p>
-                            <a class="btn btn-danger" href="{% url 'cart_remove_item' pk=forloop.parentloop.counter0 %}">X</a>
+                    <div class="cart-item-flex">
+                        <!--<p style=" margin-left: 10px; width: 25%"> {{pizza}}</p>-->
+                        <div style="background-color:#CE0000;width: 23%; height:100%; box-shadow: rgba(0, 0, 0, 0.3) 1px 0px 30px -2px;">
+                            <div style="background-color: rgb(206, 0, 0); padding-left: 15px; width: 23%; height: 100%; display: flex; align-items: center; justify-content: flex-start; width: 95%">
+                                {{pizza}}
+                            </div>
+                        </div>
+                                <div style="background-color:#CE0000; position: relative; display: flex; justify-content: space-around; align-items: center; width: 150px; height:100%; padding: 10px; box-shadow: rgba(0, 0, 0, 0.3) 0px 0px 21px -4px;">
+                                    <form method='POST' action={% url 'cart_update' pk=pizza.pk %}> {% csrf_token %}
+                                        <input onchange="this.form.submit();" style="height:100%;" type="number" min="1" max="20" required name="count" value={{item.count}}>
+                                    </form>
+                                    {{   pizza.price|mul:item.count}} zł
+                                </div>
+                            <a style="text-decoration: none;" href="{% url 'cart_remove_item' pk=forloop.parentloop.counter0 %}"><div class="close-button"><i class="material-icons md-48 md-dark">close</i></div></a>
+                            <!--<a class="btn btn-danger" href="{% url 'cart_remove_item' pk=forloop.parentloop.counter0 %}">X</a>-->
                     </div>
                 {% endif %}
             {% endfor %} 
         {% endfor %}
-        <a class="btn btn-danger" href="{% url 'cart_clear' %}">Wyczyść liste</a>
-        <a class="btn btn-success" href="{% url 'order_finalize'%}">Finalizuj</a>
+        <div style="display: flex; justify-content: flex-end; width:90%; margin-left:22px; margin-top:15px">
+            <a class="btn btn-danger" style="margin-left: 4px;" href="{% url 'cart_clear' %}">Wyczyść liste</a>
+            <a class="btn btn-success" style="margin-left: 4px;" href="{% url 'order_finalize'%}">Finalizuj</a>
+        </div>
     {% else %}
         <p class="text-nowrap" style="position: absolute; text-align:center; font-size: 45px">Koszyk nie zawiera żadnych elementów</p>
     {% endif %}
+    </div>
 {% endblock %}
-
 
