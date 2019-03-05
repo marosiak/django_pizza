@@ -1,17 +1,17 @@
 {% extends 'pizza/base.html' %}
 
 {% block content %}
-   <form method='POST' action={% url 'order_finalize' %}>
-        {% csrf_token %}
-        Ulica: <input type="text" name={{form.street.name}}> <br>
-        Miasto: <input type="text" name={{form.city.name}}> <br>
-        Nr budynku: <input type="text" name={{form.building_number.name}}> <br>
-        Nr telefonu: <input type="text" name={{form.phone_number.name}}> <br>
-        Komentarz (opcjonalne): <input type="text" name={{form.comment.name}}> <br>
-
-        <input class="btn btn-primary" type="submit" value="Potwierdź">
-    </form>
-
+    <div style="display: flex; align-items: flex-start; flex-direction: column; justify-content: center; margin-top: 17px; margin-left: 17px;">
+       <form method='POST' action={% url 'order_finalize' %}>
+            {% csrf_token %}
+            <div class="form-delegate">Ulica: <input type="text" name={{form.street.name}}></div>
+            <div class="form-delegate"> Miasto: <input type="text" name={{form.city.name}}></div>
+            <div class="form-delegate">Nr budynku: <input type="text" name={{form.building_number.name}}></div>
+            <div class="form-delegate">Nr telefonu: <input type="text" name={{form.phone_number.name}}></div>
+            <div class="form-delegate">Komentarz (opcjonalne): <input type="text" name={{form.comment.name}}></div>
+            <div style="padding-top: 9px;"><input class="btn btn-primary" type="submit" value="Potwierdź"></div>
+        </form>
+    </div>
 {% endblock %}
 
 
