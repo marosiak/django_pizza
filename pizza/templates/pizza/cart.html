@@ -1,7 +1,7 @@
 {% extends 'pizza/base.html' %}
 {% load mathfilters %}
-
 {% block content %}
+
     <div id="cart-main" style="display: flex; align-items: flex-start;">
         <div id="cart-left" style="display: flex; flex-direction: column; width:70%; margin-left: 19px; margin-top: 12px;">
         {% if cart_items|length > 0 %}
@@ -12,7 +12,7 @@
                         {% if pizza.pk == item.pk %}
                             <div class="cart-item-flex">
                                 <div style="background-color:#CE0000;width: 23%; height:100%; box-shadow: rgba(0, 0, 0, 0.3) 0px 0px 30px -2px;">
-                                    <div style="background-color: rgb(206, 0, 0); padding-left: 15px; width: 23%; height: 100%; display: flex; align-items: center; justify-content: flex-start; width: 95%">
+                                    <div style="background-color: rgb(206, 0, 0); padding-left: 15px; height: 100%; display: flex; align-items: center; justify-content: flex-start; width: 95%; font-size: 19px; line-height: 30px; font-weight: 300;">
                                         {{pizza}}
                                     </div>
                                 </div>
@@ -30,10 +30,10 @@
             </div>
     </div>
     <div id="cart-right" style="background-color: rgb(206, 0, 0); width: 18rem; height: 8rem; margin-top: 71px; margin-left: 11px; display: flex; align-items: center; place-content: space-between; flex-direction: column;">
-        <div style="color: white; font-size: 27px; text-align: center; line-height: 34px; letter-spacing: 0.6px; font-weight: 300; margin-top: 10px;">Do zapłaty: 5 zł</div>
+        <div style="color: white; font-size: 27px; text-align: center; line-height: 34px; letter-spacing: 0.6px; font-weight: 300; margin-top: 10px;">Do zapłaty: {{total_price}} zł</div>
         <div style="background-color: rgb(180,1,1);width: 100%; display: flex; justify-content: flex-end; padding-left: 8px; padding-right: 8px; padding-top: 8px; padding-bottom: 8px;">
-            <a class="btn btn-danger" style="margin-left: 0px; width:60%" href="{% url 'cart_clear' %}">Wyczyść liste</a>
-            <a class="btn btn-success" style="margin-left: 8px; width:40%" href="{% url 'order_finalize'%}">Finalizuj</a>
+            <a class="button danger huge" style="margin-left: 0px; width:60%" href="{% url 'cart_clear' %}">Wyczyść liste</a>
+            <a class="button primary huge" style="margin-left: 8px; width:40%" href="{% url 'order_finalize'%}">Finalizuj</a>
         </div>
     </div>
     {% else %}
@@ -41,4 +41,3 @@
     {% endif %}
     </div>
 {% endblock %}
-

@@ -56,8 +56,14 @@ def cart_add(request, pk):
 
 def cart(request):
     cart_items = request.session.get('cart', [])
-    return render(request, 'pizza/cart.html', {"cart_items": cart_items, "pizzas": Pizza.objects.all()})
-
+    total_price = 0
+    # import ipdb
+    # ipdb.set_trace()
+    for cart_item in request.session['cart']:
+        for pizza in Pizza.objects.all():
+            if pizza.pk == cart_item['pk']:
+                total_price = total_price+pizza.price*cart_item['count']
+    return render(request, 'pizza/cart.html', {"cart_items": cart_items, "pizzas": Pizza.objects.all(), "total_price": total_price})
 
 def cart_remove_item(request, pk):
     request.session['cart'].pop(pk)

@@ -3,9 +3,6 @@
     <head>
         <title>Blog</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-        <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
     </head>
@@ -63,6 +60,35 @@
         }
         .form-delegate {
             display: flex; align-items: center; justify-content: space-between; flex-direction: row; margin-bottom: 4px; width: 400px;
+        }
+        .button {
+            background-color: #2ecc71;
+            display: flex; justify-content: center; align-items: center;
+            font-size: 20px; line-height: 27px; font-weight: 100; color: rgb(255, 255, 255);
+            height: 2.1rem;
+        }
+        .button.huge {
+            height: 3rem;
+        }
+        .button.primary {
+            background-color: #2ecc71;
+        }
+        .button.primary:hover {
+            background-color: #27ae60;
+        }
+        .button.danger {
+            background-color: #e74c3c;
+        }
+        .button.danger:hover {
+            background-color: #c0392b;
+        }
+
+        .button:hover {
+            background-color: #27ae60;
+            cursor: pointer;
+            user-select: none;
+            text-decoration: none;
+            color: rgb(255,255,255)
         }
         .material-icons.md-dark { color: rgba(255, 255, 255, 255); }
     </style>
