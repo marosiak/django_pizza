@@ -1,8 +1,15 @@
 {% extends 'pizza/base.html' %}
 
 {% block content %}
-    <div style="display: flex; align-items: flex-start; flex-direction: column; justify-content: center; margin-top: 17px; margin-left: 17px;">
-       <form method='POST' action={% url 'order_finalize' %}>
+    <div style="width: 30%;display: flex; align-items: flex-start; flex-direction: column; justify-content: center; margin-top: 17px; margin-left: 17px;">
+        {% if form.errors %}
+            {% for field in form %}
+                {% for error in field.errors %}
+                    <div style="margin-bottom: 9px; background-color: rgb(231, 76, 60); width: 100%; height: 2.1rem; display: flex; justify-content: center; align-items: center; color: rgb(255, 255, 255); font-size: 17px; line-height: 27px; font-weight: 100;">{{ error|escape }}</div>
+                {% endfor %}
+            {% endfor %}
+        {% endif %}
+        <form style="width:100%" method='POST' action={% url 'order_finalize' %}>
             {% csrf_token %}
             <div class="form-delegate">Ulica: <input type="text" name={{form.street.name}}></div>
             <div class="form-delegate"> Miasto: <input type="text" name={{form.city.name}}></div>
@@ -12,6 +19,7 @@
             <div style="padding-top: 9px;"><input class="btn btn-primary" type="submit" value="Potwierdź"></div>
         </form>
     </div>
+
 {% endblock %}
 
 
