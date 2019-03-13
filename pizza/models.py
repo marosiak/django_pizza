@@ -12,7 +12,7 @@ class Order(models.Model):
     start_time = models.DateTimeField(editable=False, blank=True, null=True)
     end_time = models.DateTimeField(blank=True, null=True, auto_now=False, editable=False)
     phone_number = models.CharField(max_length=12)
-    comment = models.TextField(max_length=150)
+    comment = models.TextField(max_length=150, blank=True)
 
     total_price = models.IntegerField(blank=True, null=True, editable=False)
     total_price = 33

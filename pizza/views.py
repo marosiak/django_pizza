@@ -97,8 +97,9 @@ def order_finalize(request):
             for item in request.session['cart']:
                 pizza = Pizza.objects.get(pk=item['pk'])
                 Quanity.objects.create(pizza=pizza, order=form, value=item['count'])
+            return redirect('pizzas_list')
         else:
-            return render(request, 'pizza/order_finalize.html', {'cart': request.session['cart'], 'form': form})
+            form = OrderForm()
     else:
         form = OrderForm()
     return render(request, 'pizza/order_finalize.html', {'cart': request.session['cart'], 'form': form })
