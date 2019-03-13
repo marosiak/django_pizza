@@ -15,9 +15,8 @@ class Order(models.Model):
     comment = models.TextField(max_length=150, blank=True)
 
     total_price = models.IntegerField(blank=True, null=True, editable=False)
-    total_price = 33
+    # TODO: Obliczanie total_price
     start_time = timezone.now()
-    # total_price = models.IntegerField(editable=False)
 
     # Relationship Fields
     pizzas = models.ManyToManyField(

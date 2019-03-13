@@ -57,8 +57,6 @@ def cart_add(request, pk):
 def cart(request):
     cart_items = request.session.get('cart', [])
     total_price = 0
-    # import ipdb
-    # ipdb.set_trace()
     for cart_item in request.session['cart']:
         for pizza in Pizza.objects.all():
             if pizza.pk == cart_item['pk']:
@@ -103,11 +101,3 @@ def order_finalize(request):
     else:
         form = OrderForm()
     return render(request, 'pizza/order_finalize.html', {'cart': request.session['cart'], 'form': form })
-
-
-
-# class Quanity(models.Model):
-#     pizza = models.ForeignKey("Pizza", verbose_name="Pizza", on_delete=models.CASCADE, related_name="quanities")
-#     order = models.ForeignKey("Order", verbose_name="Zamówienie", on_delete=models.CASCADE)
-#
-#     value = models.IntegerField("Ilosc", default=1)
