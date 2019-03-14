@@ -25,6 +25,12 @@ class Order(models.Model):
         through="Quanity"
     )
 
+    def calculate_price(self):
+        self.total_price = 0
+        for quanity in Quanity.objects.filter(order=self):
+            self.total_price = self.total_price+(quanity.value*quanity.pizza.price)
+
+
     def deliver(self):
         self.end_time = timezone.now()
         self.save()

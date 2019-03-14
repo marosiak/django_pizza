@@ -95,6 +95,7 @@ def order_finalize(request):
             for item in request.session['cart']:
                 pizza = Pizza.objects.get(pk=item['pk'])
                 Quanity.objects.create(pizza=pizza, order=form, value=item['count'])
+            form.calculate_price()
             return redirect('pizzas_list')
         else:
             form = OrderForm()
