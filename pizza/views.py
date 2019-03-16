@@ -17,7 +17,7 @@ def orders_list(request):
         orders = Order.objects.all()
         return render(request, 'pizza/admin_orders_list.html', {'orders': orders})
     else:
-        orders = Order.objects.filter(tracking_key__in=request.session['orders'])
+        orders = Order.objects.filter(tracking_key__in=request.session.get('orders', []))
         return render(request, 'pizza/orders_list.html', {'orders': orders})
 
 
