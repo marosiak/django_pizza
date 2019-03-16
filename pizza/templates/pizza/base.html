@@ -98,6 +98,7 @@
             <h1 id="header-text"><a style="color:white" href="/">Restauracja</a></h1>
             <div id="header-buttons-row" style="width: 150px; display: flex; flex-direction: row-reverse; padding-right: 9px;">
                 <a style="text-decoration: none;" href="{% url 'cart' %}"><div class="icon-button"><i class="material-icons md-48 md-dark">shopping_cart</i></div></a>
+                <a style="text-decoration: none;" href="{% url 'orders_list' %}"><div class="icon-button"><i class="material-icons md-48 md-dark">alarm</i></div></a>
             </div>
         </div>
         {% block content %}

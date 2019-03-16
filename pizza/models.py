@@ -13,10 +13,10 @@ class Order(models.Model):
     end_time = models.DateTimeField(blank=True, null=True, auto_now=False, editable=False)
     phone_number = models.CharField(max_length=12)
     comment = models.TextField(max_length=150, blank=True)
-
+    state = models.TextField(max_length=50, editable=False, default="Waiting approval")
     total_price = models.IntegerField(blank=True, null=True, editable=False)
-    # TODO: Obliczanie total_price
     start_time = timezone.now()
+    tracking_key = models.CharField(max_length=36, unique=True, editable=False, blank=True, null=True)
 
     # Relationship Fields
     pizzas = models.ManyToManyField(

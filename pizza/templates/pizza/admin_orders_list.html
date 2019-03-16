@@ -1,0 +1,9 @@
+{% extends 'pizza/base.html' %}
+
+{% block content %}
+   <h3>Zamówienia do obsługi: </h3>
+
+   {% for order in orders %}
+      <h4><a href="{% url 'order_detail' pk=order.pk %}">{{order.street}}, {{order.phone_number}}</a></h4>
+   {% endfor %}
+{% endblock %}

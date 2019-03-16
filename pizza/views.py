@@ -1,18 +1,24 @@
 from django.shortcuts import render, redirect
-from django.core import serializers
 from django.utils import timezone
 
-from .models import Order, Pizza, Quanity
 from .forms import OrderForm
-import ipdb
-import json
-
+from .models import Order, Pizza, Quanity
+from django.contrib.auth import logout
 
 # Create your views here.
 
+def logout_user(request):
+    if request.user.is_authenticated:
+        logout(request)
+    return redirect('dashboard')
+
 def orders_list(request):
-    orders = Order.objects.all()
-    return render(request, 'pizza/orders_list.html', {'orders': orders})
+    if request.user.is_authenticated:
+        orders = Order.objects.all()
+        return render(request, 'pizza/admin_orders_list.html', {'orders': orders})
+    else:
+        orders = Order.objects.filter(tracking_key__in=request.session['orders'])
+        return render(request, 'pizza/orders_list.html', {'orders': orders})
 
 
 def order_detail(request, pk):
@@ -31,9 +37,12 @@ def order_create(request):
     return render(request, 'pizza/order_create.html', {'form': form})
 
 
-def pizzas_list(request):
-    pizzas = Pizza.objects.all()
-    return render(request, 'pizza/pizzas_list.html', {'pizzas': pizzas})
+def dashboard(request):
+    if request.user.is_authenticated:
+        return redirect('orders_list')
+    else:
+        pizzas = Pizza.objects.all()
+        return render(request, 'pizza/pizzas_list.html', {'pizzas': pizzas})
 
 
 def cart_add(request, pk):
@@ -51,7 +60,7 @@ def cart_add(request, pk):
             else:
                 request.session['cart'].append(cart_item)
         request.session.modified = True
-    return redirect('pizzas_list')
+    return redirect('dashboard')
 
 
 def cart(request):
@@ -91,12 +100,19 @@ def order_finalize(request):
         if form.is_valid():
             form = form.save(commit=False)
             form.start_time = timezone.now()
+            import uuid
+            form.tracking_key = str(uuid.uuid4())
+            if 'orders' not in request.session:
+                request.session['orders'] = [form.tracking_key]
+            else:
+                request.session['orders'].append(form.tracking_key)
             form.save()
             for item in request.session['cart']:
                 pizza = Pizza.objects.get(pk=item['pk'])
                 Quanity.objects.create(pizza=pizza, order=form, value=item['count'])
             form.calculate_price()
-            return redirect('pizzas_list')
+            request.session.modified = True
+            return redirect('dashboard')
         else:
             form = OrderForm()
     else:
