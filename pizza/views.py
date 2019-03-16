@@ -1,9 +1,9 @@
 from django.shortcuts import render, redirect
 from django.utils import timezone
-
 from .forms import OrderForm
 from .models import Order, Pizza, Quanity
 from django.contrib.auth import logout
+from django.utils.translation import activate
 
 # Create your views here.
 
@@ -13,6 +13,8 @@ def logout_user(request):
     return redirect('dashboard')
 
 def orders_list(request):
+    activate('pl')
+    # TODO: Jakaś ładna zmiana języka
     if request.user.is_authenticated:
         orders = Order.objects.all()
         return render(request, 'pizza/admin_orders_list.html', {'orders': orders})
@@ -22,8 +24,12 @@ def orders_list(request):
 
 
 def order_detail(request, pk):
-    orders = Order.objects.get(pk=pk)
-    return render(request, 'pizza/order_detail.html', {'order': orders})
+    order = Order.objects.get(pk=pk)
+    if order.tracking_key in request.session.get('orders',[]):
+        return render(request, 'pizza/order_detail.html', {'order': order})
+    else:
+        return redirect('orders_list')
+
 
 
 def order_deliver(request, pk):
@@ -66,7 +72,7 @@ def cart_add(request, pk):
 def cart(request):
     cart_items = request.session.get('cart', [])
     total_price = 0
-    for cart_item in request.session['cart']:
+    for cart_item in request.session.get('cart',[]):
         for pizza in Pizza.objects.all():
             if pizza.pk == cart_item['pk']:
                 total_price = total_price+pizza.price*cart_item['count']
@@ -110,7 +116,7 @@ def order_finalize(request):
             for item in request.session['cart']:
                 pizza = Pizza.objects.get(pk=item['pk'])
                 Quanity.objects.create(pizza=pizza, order=form, value=item['count'])
-            form.calculate_price()
+            form.start()
             request.session.modified = True
             return redirect('dashboard')
         else:

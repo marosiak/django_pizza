@@ -3,19 +3,27 @@ from django.db import models as models
 from django.urls import reverse
 from django.utils import timezone
 
+from .enums import StateEnum
+
 
 class Order(models.Model):
     # Fields
     street = models.CharField(max_length=25)
     city = models.CharField(max_length=30)
     building_number = models.IntegerField()
-    start_time = models.DateTimeField(editable=False, blank=True, null=True)
+    start_time = models.DateTimeField(editable=False, blank=True, null=True, default=timezone.now())
     end_time = models.DateTimeField(blank=True, null=True, auto_now=False, editable=False)
     phone_number = models.CharField(max_length=12)
     comment = models.TextField(max_length=150, blank=True)
-    state = models.TextField(max_length=50, editable=False, default="Waiting approval")
+
+
+    state = models.CharField(
+        max_length=5,
+        choices=[(tag, tag.value) for tag in StateEnum],
+        default=StateEnum.NotApproved,
+    )
+
     total_price = models.IntegerField(blank=True, null=True, editable=False)
-    start_time = timezone.now()
     tracking_key = models.CharField(max_length=36, unique=True, editable=False, blank=True, null=True)
 
     # Relationship Fields
@@ -25,7 +33,8 @@ class Order(models.Model):
         through="Quanity"
     )
 
-    def calculate_price(self):
+    def start(self):
+        self.start_time = timezone.now()
         self.total_price = 0
         for quanity in Quanity.objects.filter(order=self):
             self.total_price = self.total_price+(quanity.value*quanity.pizza.price)
