@@ -24,6 +24,7 @@ def orders_list(request):
 
 
 def order_detail(request, pk):
+    activate('pl')
     order = Order.objects.get(pk=pk)
     if order.tracking_key in request.session.get('orders',[]):
         return render(request, 'pizza/order_detail.html', {'order': order})

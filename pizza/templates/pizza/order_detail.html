@@ -1,34 +1,39 @@
 {% extends 'pizza/base.html' %}
-
+{% load i18n %}
 {% block content %}
-   <h3>Dane Kontaktowe</h3>
-   <p>Kontakt: {{order.phone_number}}</p>
-   <p>Ulica: {{order.street}}</p>
-   <p>Nr. budynku: {{order.building_number}}</p>
-   <p>Miasto: {{order.city}}</p>
-   <p>Do zapłaty: {{order.total_price}}</p>
-   <p>Czas zlecenia: {{order.start_time}}</p>
-   {% if order.end_time %}
-   <p>Czas Dostarczenia: {{order.end_time}}</p>
-   {% endif %}
+   <h3 style="margin-left: 14px; margin-top: 15px;">Dane Kontaktowe</h3>
+   <div style="line-height: 28px; font-size: 18px; font-weight: 400; margin-left: 29px;">
+      <b>Kontakt:</b> {{order.phone_number}}<br>
+      <b>Ulica:</b> {{order.street}}<br>
+      <b>Nr. budynku:</b> {{order.building_number}}<br>
+      <b>Miasto:</b> {{order.city}}<br>
+      <b>Do zapłaty:</b> {{order.total_price}}<br>
+      <b>Czas zlecenia:</b> {{order.start_time}}<br>
+      {% if order.end_time %}
+         <b>Czas Dostarczenia:</b> {{order.end_time}}<br>
+      {% endif %}
+   </div>
 
 <br>
 
-   <h3>Zamówienia</h3>
-   <ul>
-   {% for pizza in order.pizzas.all  %}
-      <li>{{pizza.name}}:
-         {% for quanity in pizza.quanities.all %}
-               {% if quanity.order.pk == order.pk %}
-                  {{ quanity.value }}
-               {% endif %}
-         {% endfor %}
-         </li>
-   {% endfor %}
-   </ul>
-   <br>
+   <h3 style="margin-left: 14px; margin-top: 15px;">Zamówienia</h3>
+   <div style="margin-left: 14px;">
+      <ul>
+      {% for pizza in order.pizzas.all  %}
+         <li>{{pizza.name}}:
+            {% for quanity in pizza.quanities.all %}
+                  {% if quanity.order.pk == order.pk %}
+                     {{ quanity.value }}
+                  {% endif %}
+            {% endfor %}
+            </li>
+      {% endfor %}
+      </ul>
+   </div>
+   <h3 style="margin-left: 14px; margin-top: 20px;">Stan</h3>
+   <div style="margin-left: 29px;">{% trans order.state %}</div>
    {% if not order.end_time %}
-         <a class="btn btn-success" href="{% url 'order_deliver' pk=order.pk %}">Dostarcz</a>
+
    {% endif %}
 
 {% endblock %}
