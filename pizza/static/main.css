@@ -1,0 +1,44 @@
+@import 'sanitize.css';
+body nav {
+  background: #CE0000;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: center;
+  height: 3.5em;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 0px 20px 0px;
+}
+body nav #nav-label a {
+  color: white;
+  margin-left: 15px;
+  font-size: 26px;
+  font-weight: 300;
+  text-align: center;
+  line-height: 2em;
+  letter-spacing: 3.64px;
+  text-decoration: none;
+}
+body nav #nav-label a:hover {
+  opacity: 0.5;
+}
+body nav ul {
+  margin-right: 15px;
+}
+body nav ul li {
+  background: #B40101;
+  list-style-type: none;
+  display: inline-block;
+  padding: 15px 20px 14px;
+  margin-right: 1px;
+  position: relative;
+}
+body nav ul li a {
+  color: white;
+}
+body nav li:hover {
+  background: #CE0000;
+  cursor: pointer;
+}
+
+/*# sourceMappingURL=main.css.map */

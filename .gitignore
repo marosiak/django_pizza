@@ -5,3 +5,4 @@ virtualEnv/
 .vscode
 migrations
 .idea
+*.map
