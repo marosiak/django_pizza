@@ -1,51 +1,17 @@
 @import 'sanitize.css';
+@import 'variables';
+@import 'components';
 
-$primary-color: #CE0000;
-$accent-color: #B40101;
+@import 'navigation';
+
+
 
 body {
-  nav {
-    background: $primary-color;
-    color: white;
-    display: flex;
-    justify-content: space-between;
-    flex-direction: row;
-    align-items: center;
-    height: 3.5em;
-    box-shadow: rgba(0, 0, 0, 0.3) 0px 0px 20px 0px;
-    #nav-label {
-      a {
-        color: white;
-        margin-left: 15px;
-        font-size: 26px;
-        font-weight: 300;
-        text-align: center;
-        line-height: 2em;
-        letter-spacing: 3.64px;
-        text-decoration: none;
-      }
-      a:hover {
-        opacity: 0.5;
-      }
-    }
-    ul {
-      margin-right: 15px;
-      li {
-        background: $accent-color;
-        list-style-type: none;
-        display: inline-block;
-        padding: 15px 20px 14px;
-        margin-right: 1px;
-        position: relative;
-        a {
-          color: white;
-        }
-      }
-    }
-
-    li:hover {
-      background: $primary-color;
-      cursor: pointer;
-    }
+  #content {
+    width: 100%;
+    height:100%;
+    padding-left: 8px;
+    padding-right: 8px;
+    margin-top: 8px;
   }
 }

@@ -2,11 +2,11 @@
 {% load i18n %}
 {% block content %}
 
-      <h3 style="margin-top: 7px; margin-left: 15px;">Twoje zamówienia: </h3>
-   <div style="margin-top: 12px; margin-left: 26px;">
+    <h3 style="margin-top: 7px; margin-left: 15px;">Twoje zamówienia: </h3>
+    <div style="margin-top: 12px; margin-left: 26px;">
 
-      {% for order in orders %}
-      <h4><a href="{% url 'order_detail' pk=order.pk %}">{{order.start_time}}, {% trans order.state %}</a></h4>
-      {% endfor %}
-   </div>
+        {% for order in orders %}
+            <h4><a href="{% url 'order_detail' pk=order.pk %}">{{ order.start_time }}, {% trans order.state %}</a></h4>
+        {% endfor %}
+    </div>
 {% endblock %}

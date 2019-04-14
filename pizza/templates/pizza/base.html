@@ -13,30 +13,16 @@
 <body>
 <nav>
     <div id="nav-label">
-    <a href="/">Restauracja</a>
-        </div>
+        <a href="/">Restauracja</a>
+    </div>
     <ul>
-        <li><i class="material-icons">local_shipping</i></li>
+        <li><a href="{% url 'orders_list' %}"><i class="material-icons">local_shipping</i></a></li>
         <li><a href="{% url 'cart' %}"><i class="material-icons">shopping_cart</i></a></li>
     </ul>
 </nav>
-{#<div id="page-header" width="100%" height="25px"#}
-{#     style="background-color: rgb(206, 0, 0); display: flex; place-content: space-between; align-items: center; box-shadow: rgba(0, 0, 0, 0.686) 0px -19px 32px 16px;">#}
-{#    <h1 id="header-text"><a style="color:white" href="/">Restauracja</a></h1>#}
-{#    <div id="header-buttons-row" style="width: 150px; display: flex; flex-direction: row-reverse; padding-right: 9px;">#}
-{#        <a style="text-decoration: none;" href="{% url 'cart' %}">#}
-{#            <div class="icon-button"><i class="material-icons md-48 md-dark">shopping_cart</i></div>#}
-{#        </a>#}
-{#        <a style="text-decoration: none;" href="{% url 'orders_list' %}">#}
-{#            <div class="icon-button" id="languageSelector"><i class="material-icons md-48 md-dark">alarm</i></div>#}
-{#        </a>#}
-{#        <a style="text-decoration: none;" href="{% url 'orders_list' %}">#}
-{#            <div class="icon-button dropDown"><i class="material-icons md-48 md-dark">translate</i></div>#}
-{#        </a>#}
-{##}
-{#    </div>#}
-{#</div>#}
-{% block content %}
-{% endblock %}
+<div id="content">
+    {% block content %}
+    {% endblock %}
+</div>
 </body>
 </html>
