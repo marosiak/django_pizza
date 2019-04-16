@@ -1,0 +1,13 @@
+.cart {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  .cart-left {
+    width: 80%;
+  }
+  .cart-right {
+    width: calc(20% - 10px)
+  }
+}
+
+

@@ -54,14 +54,13 @@ def dashboard(request):
 
 def cart_add(request, pk):
     if request.method == 'POST':
-        count = int(request.POST['count'])
         exists = False
         for cart_item in request.session.get('cart', []):
             if cart_item['pk'] == pk:
-                cart_item['count'] += count
+                cart_item['count'] += 1
                 exists = True
         if not exists:
-            cart_item = {'pk': int(pk), 'count': count}
+            cart_item = {'pk': int(pk), 'count': 1}
             if 'cart' not in request.session:
                 request.session['cart'] = [cart_item]
             else:
