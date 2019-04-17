@@ -14,10 +14,10 @@
 .card {
   background-color: rgb(232, 232, 232);
   margin: 4px;
-  position: relative;
   width: 310px;
   height: 230px;
   box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 3px 0px;
+  position: relative;
   .card-header {
     margin-left: 18px;
     margin-right: 18px;
@@ -55,8 +55,8 @@
 
     input {
       width: 100%;
-      //height: 35px;
-      background-color: transparent;
+      //background-color: transparent;
+      background-color: #d0d0d0;
       color: black;
       padding: 15px 32px;
       text-align: center;
@@ -65,12 +65,14 @@
       display: inline-block;
       font-size: 16px;
       outline:0;
-      @include border-radius(200px);
-      border: 0.9px solid #707070;
+      color: #494949;
+      border: none;
+      position: relative;
     }
     input:hover {
-      color: #7c7c7c;
-      border: 0.9px solid #929292;
+      color: #636363;
+      background-color: #c5c5c5;
+      cursor: pointer;
     }
   }
 }
@@ -78,16 +80,22 @@
 
 .cart-item-delegate {
       background-color: rgb(232, 232, 232);
-      width: 400px;
+      box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 2px 0px;
+      width: 60%;
+      height: 30px;
       display: flex; place-content: space-between; align-items: center; flex-direction: row;
-      margin-bottom: 3px;
+      margin-bottom: 4px;
       .cart-label {
-        width: 35%;
+        width: 13em;
+        margin-left: 8px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
       }
       .cart-price-count {
         display: flex; justify-content: space-between;
-         align-items: center;
-        width: 200px;
+        align-items: center;
+        width: 9em;
         form {
           input {
 
@@ -95,6 +103,17 @@
         }
         .price-label {
 
+        }
+      }
+      .close-button {
+        a {
+          color: #1a1a1a;
+          display: flex;
+          align-items: center;
+          text-decoration: none;
+        }
+        a:hover {
+          color: #9b9b9b;
         }
       }
     }

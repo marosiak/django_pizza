@@ -14,8 +14,8 @@
                                     {{ pizza }}
                                 </div>
                                 <div class="cart-price-count">
-                                    <form method='POST' action={% url
-                                            'cart_update' pk=pizza.pk %}> {% csrf_token %}
+                                    <form method='POST' action={% url 'cart_update' pk=pizza.pk %}>
+                                        {% csrf_token %}
                                         <input onchange="this.form.submit();" type="number"
                                                min="1" max="20" required
                                                name="count" value={{ item.count }}>
@@ -24,25 +24,29 @@
                                         {{ pizza.price|mul:item.count }} zł
                                     </div>
                                 </div>
-                                <a
-                                        href="{% url 'cart_remove_item' pk=forloop.parentloop.counter0 %}">
-                                    <div class="close-button"><i class="material-icons md-48 md-dark">close</i>
-                                    </div>
-                                </a>
+                                <div class="close-button">
+                                    <a href="{% url 'cart_remove_item' pk=forloop.parentloop.counter0 %}">
+                                        <i class="material-icons">close</i>
+                                    </a>
+                                </div>
                             </div>
                         {% endif %}
                     {% endfor %}
                 {% endfor %}
                 </div>
                 <div class="cart-right">
-                    <div>
-                        Do zapłaty: {{ total_price }} zł
-                    </div>
-                    <div>
-                        <a class="button danger huge" href="{% url 'cart_clear' %}">Wyczyść
-                            liste</a>
-                        <a class="button primary huge"
-                           href="{% url 'order_finalize' %}">Finalizuj</a>
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">
+                                Do zapłaty: {{ total_price }} zł
+                            </div>
+                        </div>
+                        <div class="button-row">
+                            <a class="button danger huge" href="{% url 'cart_clear' %}">Wyczyść
+                                liste</a>
+                            <a class="button primary huge"
+                               href="{% url 'order_finalize' %}">Finalizuj</a>
+                        </div>
                     </div>
                 </div>
             {% else %}
