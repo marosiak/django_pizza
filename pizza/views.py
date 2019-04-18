@@ -23,10 +23,10 @@ def orders_list(request):
     # TODO: Jakaś ładna zmiana języka
     if request.user.is_authenticated:
         orders = Order.objects.all()
-        return render(request, 'pizza/admin_orders_list.html', {'orders': orders})
+        return render(request, 'pizza/orders_list.html', {'orders': orders, 'admin': True})
     else:
         orders = Order.objects.filter(tracking_key__in=request.session.get('orders', []))
-        return render(request, 'pizza/orders_list.html', {'orders': orders})
+        return render(request, 'pizza/orders_list.html', {'orders': orders, 'admin': False})
 
 
 def order_detail(request, pk):

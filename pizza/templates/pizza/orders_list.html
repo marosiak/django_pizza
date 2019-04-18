@@ -2,11 +2,17 @@
 {% load i18n %}
 {% block content %}
 
-    <h3 style="margin-top: 7px; margin-left: 15px;">Twoje zamówienia: </h3>
-    <div style="margin-top: 12px; margin-left: 26px;">
+{#     TODO: Rozróżnienie listy na admina i usera po {{ admin }}#}
+{#     TODO: [user] Ładne rozwijane listy do orderów z listą itemów które zamawiam#}
+{#     TODO: [admin] Możliwość zmiany statusu#}
 
-        {% for order in orders %}
-            <h4><a href="{% url 'order_detail' pk=order.pk %}">{{ order.start_time }}, {% trans order.state %}</a></h4>
-        {% endfor %}
+    <div class="orders-list">
+    <h2>Oczekują na akceptacje: </h2>
+
+        <div class="list">
+            {% for order in orders %}
+               <a href="{% url 'order_detail' pk=order.pk %}">{{ order.start_time }}</a>
+            {% endfor %}
+        </div>
     </div>
 {% endblock %}
