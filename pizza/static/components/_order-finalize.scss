@@ -1,0 +1,46 @@
+.order-finalize {
+  margin-left: 22px;
+  padding-top: 21px;
+  min-width: 480px;
+  max-width: 600px;
+
+  form {
+    .column {
+      .label {
+        font-size: 15pt;
+        font-weight: lighter;
+        padding-top: 8px;
+        padding-bottom: 3px;
+      }
+
+      .field {
+        input {
+          width: 100%;
+          padding: 12px 20px;
+          margin: 8px 0;
+          display: inline-block;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          box-sizing: border-box;
+        }
+      }
+    }
+
+    input[type=submit] {
+
+
+    }
+
+    input[type=text] {
+
+    }
+    .submit-row {
+      display: flex; align-items: center; place-content: space-between; flex-direction: row;
+      padding-bottom: 24px;
+      input {
+        width: 250px;
+        height: 70px;
+      }
+    }
+  }
+}

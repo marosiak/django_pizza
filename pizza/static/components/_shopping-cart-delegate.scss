@@ -1,0 +1,41 @@
+.shopping-cart-delegate {
+      background-color: rgb(232, 232, 232);
+      box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 2px 0px;
+      width: 60%;
+      height: 30px;
+      display: flex; place-content: space-between; align-items: center; flex-direction: row;
+      margin-bottom: 4px;
+      .cart-label {
+        width: 13em;
+        margin-left: 8px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      .cart-price-count {
+        display: flex; justify-content: space-between;
+        align-items: center;
+        width: 9em;
+        max-width: 11em;
+        min-width:9em;
+        form {
+          input {
+
+          }
+        }
+        .price-label {
+          width: 4em;
+        }
+      }
+      .close-button {
+        a {
+          color: #1a1a1a;
+          display: flex;
+          align-items: center;
+          text-decoration: none;
+        }
+        a:hover {
+          color: #9b9b9b;
+        }
+      }
+    }

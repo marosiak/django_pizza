@@ -5,12 +5,18 @@ from .models import Order, Pizza, Quanity
 from django.contrib.auth import logout
 from django.utils.translation import activate
 
+from .decorators import check_recaptcha
+
+import requests
+
+
 # Create your views here.
 
 def logout_user(request):
     if request.user.is_authenticated:
         logout(request)
     return redirect('dashboard')
+
 
 def orders_list(request):
     activate('pl')
@@ -26,11 +32,10 @@ def orders_list(request):
 def order_detail(request, pk):
     activate('pl')
     order = Order.objects.get(pk=pk)
-    if order.tracking_key in request.session.get('orders',[]):
+    if order.tracking_key in request.session.get('orders', []):
         return render(request, 'pizza/order_detail.html', {'order': order})
     else:
         return redirect('orders_list')
-
 
 
 def order_deliver(request, pk):
@@ -72,11 +77,13 @@ def cart_add(request, pk):
 def cart(request):
     cart_items = request.session.get('cart', [])
     total_price = 0
-    for cart_item in request.session.get('cart',[]):
+    for cart_item in request.session.get('cart', []):
         for pizza in Pizza.objects.all():
             if pizza.pk == cart_item['pk']:
-                total_price = total_price+pizza.price*cart_item['count']
-    return render(request, 'pizza/cart.html', {"cart_items": cart_items, "pizzas": Pizza.objects.all(), "total_price": total_price})
+                total_price = total_price + pizza.price * cart_item['count']
+    return render(request, 'pizza/cart.html',
+                  {"cart_items": cart_items, "pizzas": Pizza.objects.all(), "total_price": total_price})
+
 
 def cart_remove_item(request, pk):
     request.session['cart'].pop(pk)
@@ -100,10 +107,11 @@ def cart_update(request, pk):
     return redirect('cart')
 
 
+@check_recaptcha
 def order_finalize(request):
     if request.method == "POST":
         form = OrderForm(request.POST)
-        if form.is_valid():
+        if form.is_valid() and request.recaptcha_is_valid:
             form = form.save(commit=False)
             form.start_time = timezone.now()
             import uuid
@@ -123,4 +131,4 @@ def order_finalize(request):
             form = OrderForm()
     else:
         form = OrderForm()
-    return render(request, 'pizza/order_finalize.html', {'cart': request.session['cart'], 'form': form })
+    return render(request, 'pizza/order_finalize.html', {'cart': request.session['cart'], 'form': form})

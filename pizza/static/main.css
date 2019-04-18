@@ -1,9 +1,4 @@
 @import 'sanitize.css';
-.grid-center {
-  display: flex;
-  justify-content: center;
-}
-
 .card {
   background-color: #e8e8e8;
   margin: 4px;
@@ -63,7 +58,69 @@
   cursor: pointer;
 }
 
-.cart-item-delegate {
+.shopping-cart {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-left: 15px;
+  margin-right: 15px;
+}
+.shopping-cart .cart-left {
+  width: 75%;
+}
+.shopping-cart .cart-left h1 {
+  color: #333333;
+  font-weight: 500;
+}
+.shopping-cart .cart-right {
+  margin-top: 25px;
+  width: calc(25% - 10px);
+  align-content: center;
+  vertical-align: baseline;
+  display: flex;
+  justify-content: flex-end;
+}
+.shopping-cart .cart-right .card {
+  width: 260px;
+  max-width: 260px;
+  min-width: 220px;
+  height: 140px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+.shopping-cart .cart-right .card .card-header {
+  display: flex;
+  justify-content: center;
+  padding-top: 15px;
+}
+.shopping-cart .cart-right .card .card-header .card-title {
+  width: 200px;
+  max-width: 200px;
+  font-size: 23px;
+  text-align: center;
+}
+.shopping-cart .cart-right .card .button-row {
+  display: flex;
+  justify-content: center;
+  justify-content: space-between;
+  position: absolute;
+  bottom: 10px;
+  width: 200px;
+  max-width: 200px;
+}
+.shopping-cart .cart-right .card .button-row a {
+  text-decoration: none;
+  padding: 6px 11px;
+  background-color: #d0d0d0;
+  color: #494949;
+}
+.shopping-cart .cart-right .card .button-row a:hover {
+  background-color: #c5c5c5;
+  color: #636363;
+}
+
+.shopping-cart-delegate {
   background-color: #e8e8e8;
   box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 2px 0px;
   width: 60%;
@@ -74,76 +131,38 @@
   flex-direction: row;
   margin-bottom: 4px;
 }
-.cart-item-delegate .cart-label {
+.shopping-cart-delegate .cart-label {
   width: 13em;
   margin-left: 8px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-.cart-item-delegate .cart-price-count {
+.shopping-cart-delegate .cart-price-count {
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 9em;
+  max-width: 11em;
+  min-width: 9em;
 }
-.cart-item-delegate .close-button a {
+.shopping-cart-delegate .cart-price-count .price-label {
+  width: 4em;
+}
+.shopping-cart-delegate .close-button a {
   color: #1a1a1a;
   display: flex;
   align-items: center;
   text-decoration: none;
 }
-.cart-item-delegate .close-button a:hover {
+.shopping-cart-delegate .close-button a:hover {
   color: #9b9b9b;
 }
 
-.cart {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  margin-left: 15px;
-  margin-right: 15px;
-}
-.cart .cart-left {
-  width: 80%;
-}
-.cart .cart-left h1 {
-  color: #333333;
-  font-weight: 500;
-}
-.cart .cart-right {
-  margin-top: 25px;
-  width: calc(20% - 10px);
-  align-content: center;
-  vertical-align: baseline;
-}
-.cart .cart-right .card {
-  width: 100%;
-  height: 140px;
-}
-.cart .cart-right .card .card-header {
+.grid-center {
   display: flex;
   justify-content: center;
-  padding-top: 15px;
-}
-.cart .cart-right .card .button-row {
-  display: flex;
-  justify-content: center;
-  justify-content: space-between;
-  position: absolute;
-  bottom: 10px;
-  left: 20px;
-  right: 20px;
-}
-.cart .cart-right .card .button-row a {
-  text-decoration: none;
-  padding: 6px 11px;
-  background-color: #d0d0d0;
-  color: #494949;
-}
-.cart .cart-right .card .button-row a:hover {
-  background-color: #c5c5c5;
-  color: #636363;
+  padding-top: 8px;
 }
 
 nav {
@@ -165,6 +184,7 @@ nav .nav-label a {
   line-height: 2em;
   letter-spacing: 3.64px;
   text-decoration: none;
+  user-select: none;
 }
 nav .nav-label a:hover {
   opacity: 0.5;
@@ -172,6 +192,7 @@ nav .nav-label a:hover {
 nav ul {
   margin-right: 15px;
   display: flex;
+  user-select: none;
 }
 nav ul li {
   background: #B40101;
@@ -193,6 +214,39 @@ nav ul li a {
 nav li:hover {
   background: #CE0000;
   cursor: pointer;
+}
+
+.order-finalize {
+  margin-left: 22px;
+  padding-top: 21px;
+  min-width: 480px;
+  max-width: 600px;
+}
+.order-finalize form .column .label {
+  font-size: 15pt;
+  font-weight: lighter;
+  padding-top: 8px;
+  padding-bottom: 3px;
+}
+.order-finalize form .column .field input {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+.order-finalize form .submit-row {
+  display: flex;
+  align-items: center;
+  place-content: space-between;
+  flex-direction: row;
+  padding-bottom: 24px;
+}
+.order-finalize form .submit-row input {
+  width: 250px;
+  height: 70px;
 }
 
 body .content {

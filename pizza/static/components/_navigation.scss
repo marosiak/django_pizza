@@ -17,6 +17,7 @@ nav {
         line-height: 2em;
         letter-spacing: 3.64px;
         text-decoration: none;
+        user-select: none;
       }
       a:hover {
         opacity: 0.5;
@@ -25,6 +26,7 @@ nav {
     ul {
       margin-right: 15px;
       display: flex;
+      user-select: none;
       li {
         background: $accent-color;
         list-style-type: none;

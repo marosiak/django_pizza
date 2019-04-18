@@ -1,10 +1,17 @@
 @import 'sanitize.css';
 @import 'variables';
-@import 'components';
+@import 'mixins';
 
-@import 'cart';
-@import 'navigation';
+@import "components/card";
+@import "components/shopping-cart";
+@import "components/shopping-cart-delegate";
 
+@import "components/grid-center";
+@import "components/navigation";
+@import "components/order-finalize";
+
+
+// main container of base.html
 body {
   .content {
     width: 100%;

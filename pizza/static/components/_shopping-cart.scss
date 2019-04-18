@@ -1,11 +1,11 @@
-.cart {
+.shopping-cart {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
   margin-left: 15px;
   margin-right: 15px;
   .cart-left {
-    width: 80%;
+    width: 75%;
     h1 {
       color: #333333;
       font-weight: 500;
@@ -13,23 +13,33 @@
   }
   .cart-right {
     margin-top: 25px;
-    width: calc(20% - 10px);
+    width: calc(25% - 10px);
     align-content: center;
     vertical-align: baseline;
+    display: flex; justify-content: flex-end;
     .card {
-      width: 100%;
+      width: 260px;
+      max-width: 260px;
+      min-width: 220px;
       height: 140px;
+      display: flex; justify-content: center; align-items: flex-start;
       .card-header {
         display: flex; justify-content: center;
         padding-top: 15px;
+        .card-title {
+          width: 200px;
+          max-width: 200px;
+          font-size: 23px;
+          text-align: center;
+        }
       }
       .button-row {
         display: flex; justify-content: center;
         justify-content: space-between;
         position: absolute;
         bottom: 10px;
-        left: 20px;
-        right: 20px;
+        width: 200px;
+        max-width: 200px;
         a {
           text-decoration: none;
           padding: 6px 11px;
@@ -44,5 +54,3 @@
     }
   }
 }
-
-

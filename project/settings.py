@@ -129,3 +129,5 @@ STATICFILES_DIRS = (
 
 LOCALE_PATHS = (
     BASE_DIR + '/pizza/locale', )
+
+GOOGLE_RECAPTCHA_SECRET_KEY = os.environ.get('captcha_token')
