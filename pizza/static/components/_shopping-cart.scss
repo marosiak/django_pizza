@@ -10,6 +10,12 @@
       color: #333333;
       font-weight: 500;
     }
+    .button { // clear button
+      margin-top: 15px;
+      width: 150px;
+      padding-left: 4px;
+      padding-right: 4px;
+    }
   }
   .cart-right {
     margin-top: 25px;
@@ -19,7 +25,7 @@
     display: flex; justify-content: flex-end;
     .card {
       width: 260px;
-      max-width: 260px;
+      max-width: 280px;
       min-width: 220px;
       height: 140px;
       display: flex; justify-content: center; align-items: flex-start;
@@ -33,24 +39,30 @@
           text-align: center;
         }
       }
-      .button-row {
-        display: flex; justify-content: center;
-        justify-content: space-between;
+      .button {
         position: absolute;
         bottom: 10px;
-        width: 200px;
-        max-width: 200px;
-        a {
-          text-decoration: none;
-          padding: 6px 11px;
-          background-color: #d0d0d0;
-          color: #494949;
-        }
-        a:hover {
-          background-color: #c5c5c5;
-          color: #636363;
-        }
+        width: calc(100% - 18px);
+        left: 9px;
+        right: 9px;
       }
     }
+  }
+}
+.empty-cart {
+  margin-top: 32px;
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  display: flex; align-items: center; justify-content: center;
+  i {
+    font-size: 36pt;
+    color: #3c3c3c;
+    user-select: none;
+  }
+  .text {
+    padding-left: 16px;
+    font-size: 17pt;
+    color: #383838
   }
 }

@@ -1,5 +1,4 @@
 {% extends 'pizza/base.html' %}
-{% load i18n %}
 {% block content %}
 
 {#     TODO: Rozróżnienie listy na admina i usera po {{ admin }}#}
@@ -7,11 +6,17 @@
 {#     TODO: [admin] Możliwość zmiany statusu#}
 
     <div class="orders-list">
+
+
     <h2>Oczekują na akceptacje: </h2>
+
+
 
         <div class="list">
             {% for order in orders %}
-               <a href="{% url 'order_detail' pk=order.pk %}">{{ order.start_time }}</a>
+               <a href="{% url 'order_detail' pk=order.pk %}">{{ order.start_time }}, {{ order.street }} {{ order.building_number }}
+                   <div class="dot"></div>
+               </a>
             {% endfor %}
         </div>
     </div>

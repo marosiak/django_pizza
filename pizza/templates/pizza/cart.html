@@ -33,6 +33,8 @@
                         {% endif %}
                     {% endfor %}
                 {% endfor %}
+                <a class="button" href="{% url 'cart_clear' %}">Wyczyść liste</a>
+
                 </div>
                 <div class="cart-right">
                     <div class="card">
@@ -41,18 +43,15 @@
                                 Do zapłaty: {{ total_price }} zł
                             </div>
                         </div>
-                        <div class="button-row">
-                            <a class="button danger huge" href="{% url 'cart_clear' %}">Wyczyść
-                                liste</a>
-                            <a class="button primary huge"
+                        <a class="button"
                                href="{% url 'order_finalize' %}">Finalizuj</a>
-                        </div>
                     </div>
                 </div>
             {% else %}
-                <p class="text-nowrap">Koszyk nie zawiera
-                    żadnych
-                    elementów</p>
+                <div class="empty-cart">
+                    <i class="material-icons">shopping_cart</i>
+                    <div class="text">Koszyk nie zawiera żadnych produktów</div>
+                </div>
             {% endif %}
     </div>
 {% endblock %}

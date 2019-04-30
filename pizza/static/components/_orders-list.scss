@@ -1,18 +1,54 @@
 .orders-list {
   margin-left: 18px;
+
   .list {
-    display: flex; justify-content: flex-start; align-items: flex-start; flex-direction: column;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
     margin-left: 12px;
+
     a {
       padding-top: 4px;
       padding-bottom: 4px;
+      padding-left: 46px;
       font-size: 15pt;
       background-color: rgb(232, 232, 232);
       box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 2px 0px;
-      width: 60%;
+      width: 50%;
       height: 60px;
-      display: flex; place-content: space-between; align-items: center; flex-direction: row;
+      display: flex;
+      place-content: space-between;
+      align-items: center;
+      flex-direction: row;
       margin-bottom: 7px;
+      text-decoration: none;
+      color: #222222;
+      position: relative;
+    }
+
+    a::before {
+      display: inline-block;
+
+      background: #5da0ee;
+      width: 13px;
+      height: 13px;
+      @include border-radius(50px);
+      position: absolute;
+      left: 18px;
+      margin-top: 1px;
+      content: "";
+    }
+
+    a:visited::before {
+      background-color: rgb(232, 232, 232);
+    }
+    a:hover {
+      background-color: rgb(213, 213, 213);
+    }
+
+    a:hover:visited::before {
+      background-color: rgb(213, 213, 213);
     }
   }
 }

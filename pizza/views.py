@@ -3,7 +3,6 @@ from django.utils import timezone
 from .forms import OrderForm
 from .models import Order, Pizza, Quanity
 from django.contrib.auth import logout
-from django.utils.translation import activate
 
 from .decorators import check_recaptcha
 
@@ -19,7 +18,6 @@ def logout_user(request):
 
 
 def orders_list(request):
-    activate('pl')
     # TODO: Jakaś ładna zmiana języka
     if request.user.is_authenticated:
         orders = Order.objects.all()
@@ -30,7 +28,6 @@ def orders_list(request):
 
 
 def order_detail(request, pk):
-    activate('pl')
     order = Order.objects.get(pk=pk)
     if order.tracking_key in request.session.get('orders', []):
         return render(request, 'pizza/order_detail.html', {'order': order})
@@ -125,6 +122,7 @@ def order_finalize(request):
                 pizza = Pizza.objects.get(pk=item['pk'])
                 Quanity.objects.create(pizza=pizza, order=form, value=item['count'])
             form.start()
+            request.session['cart'] = []
             request.session.modified = True
             return redirect('dashboard')
         else:

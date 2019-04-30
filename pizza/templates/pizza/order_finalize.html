@@ -2,15 +2,6 @@
 
 {% block content %}
     <div class="order-finalize">
-        {% for field in form %}
-            {% for error in field.errors %}
-                <div>{{ error|escape }}</div>
-            {% endfor %}
-        {% endfor %}
-
-
-
-
         <form method='POST' action={% url 'order_finalize' %}>
         {% csrf_token %}
             {% for field in form %}
@@ -22,7 +13,7 @@
 
             <div class="submit-row">
                 <div class="g-recaptcha" data-sitekey="6LdEAp8UAAAAAIyFXfVH8meDYZ3Zby_3o6EWbOSk"></div>
-                <input class="btn btn-primary" type="submit" value="Potwierdź">
+                <input type="submit" class="button" value="Potwierdź">
             </div>
         </form>
     </div>

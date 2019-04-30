@@ -20,7 +20,7 @@ class Order(models.Model):
     state = models.CharField(
         max_length=5,
         choices=[(tag, tag.value) for tag in StateEnum],
-        default=StateEnum.NotApproved,
+        default=StateEnum.NotApproved.value,
     )
 
     total_price = models.IntegerField(blank=True, null=True, editable=False)
@@ -38,6 +38,7 @@ class Order(models.Model):
         self.total_price = 0
         for quanity in Quanity.objects.filter(order=self):
             self.total_price = self.total_price+(quanity.value*quanity.pizza.price)
+        self.save()
 
 
     def deliver(self):

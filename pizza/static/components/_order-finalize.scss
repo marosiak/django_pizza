@@ -37,9 +37,14 @@
     .submit-row {
       display: flex; align-items: center; place-content: space-between; flex-direction: row;
       padding-bottom: 24px;
+      margin-top: 14px;
       input {
         width: 250px;
         height: 70px;
+
+      }
+      input:hover {
+
       }
     }
   }

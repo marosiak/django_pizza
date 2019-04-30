@@ -110,9 +110,9 @@ LANGUAGE_CODE = 'pl'
 
 TIME_ZONE = 'UTC'
 
-USE_I18N = True
+USE_I18N = False
 
-USE_L10N = True
+USE_L10N = False
 
 USE_TZ = True
 
@@ -127,7 +127,7 @@ STATICFILES_DIRS = (
     'pizza/static',
     )
 
-LOCALE_PATHS = (
-    BASE_DIR + '/pizza/locale', )
+# LOCALE_PATHS = (
+    # BASE_DIR + '/pizza/locale', )
 
 GOOGLE_RECAPTCHA_SECRET_KEY = os.environ.get('captcha_token')

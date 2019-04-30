@@ -1,5 +1,4 @@
 {% extends 'pizza/base.html' %}
-{% load i18n %}
 {% block content %}
    <h3 style="margin-left: 14px; margin-top: 15px;">Dane Kontaktowe</h3>
    <div style="line-height: 28px; font-size: 18px; font-weight: 400; margin-left: 29px;">
@@ -7,7 +6,7 @@
       <b>Ulica:</b> {{order.street}}<br>
       <b>Nr. budynku:</b> {{order.building_number}}<br>
       <b>Miasto:</b> {{order.city}}<br>
-      <b>Do zapłaty:</b> {{order.total_price}}<br>
+      <b>Do zapłaty:</b> {{order.total_price}} zł<br>
       <b>Czas zlecenia:</b> {{order.start_time}}<br>
       {% if order.end_time %}
          <b>Czas Dostarczenia:</b> {{order.end_time}}<br>
@@ -31,10 +30,7 @@
       </ul>
    </div>
    <h3 style="margin-left: 14px; margin-top: 20px;">Stan</h3>
-   <div style="margin-left: 29px;">{% trans order.state %}</div>
-   {% if not order.end_time %}
-
-   {% endif %}
+   <div style="margin-left: 29px;">{{ order.state }}</div>
 
 {% endblock %}
 
